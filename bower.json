@@ -16,10 +16,16 @@
     "grid",
     "css"
   ],
-  "author": "@pafnuty",
+  "authors": [
+    "Pavel Belousov <pafnuty@pafnuty.name> (https://github.com/pafnuty/LEGRID)"
+  ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/pafnuty/LEGRID/issues"
-  },
-  "homepage": "https://github.com/pafnuty/LEGRID"
+  "homepage": "https://github.com/pafnuty/LEGRID",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }

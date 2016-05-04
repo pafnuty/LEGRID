@@ -10,7 +10,7 @@
 
 // Breakpoints
 
-@screenPhone: 	480px;                  // screenPhone
+@screenPhone: 	481px;                  // screenPhone
 @screenTablet: 	768px;                  // screenTablet
 @screenDesktop: 992px;                  // screenDesktop
 @screenLarge:   1280px;                 // screenLarge
@@ -19,8 +19,13 @@
 @screenTabletMax: (@screenDesktop - 1); // screenTabletMax
 @screenDesktopMax: (@screenLarge - 1);  // screenDesktopMax
 
+// Размеры контейнера для разных экранов
+@screenTabletMaxWidth: 750px; // Планшеты
+@screenDesktopMaxWidth: 970px; // Десктопы
+@screenLargeMaxWidth: 1170px; // Большие десктопы
+
 
 // Массивы с данными для формирования классов колонок
-@col-names: -, -dt-, -ld-; // Такое своеобразное название обусловлено обратной совместимостью со старой сеткой. 
+@col-names: -sm-, -md-, -lg-;
 @col-breaks: @screenTablet, @screenDesktop, @screenLarge;
 @col-padding: @gutterWidth, @gutterWidthDesktop, @gutterWidthLargeDesktop;

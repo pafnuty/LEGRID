@@ -3,6 +3,7 @@
 	margin-left: -@gutter / 2;
 	margin-right: -@gutter / 2;
 }
+
 .containerGutter(@gutter) {
 	padding-left: @gutter / 2;
 	padding-right: @gutter / 2;
@@ -26,7 +27,8 @@
 		.containerGutter(@gutterWidthLargeDesktop);
 	}
 }
-.content {
+
+.row {
 	margin: 0 auto;
 	.box-sizing;
 	.flex-display;
@@ -34,17 +36,19 @@
 	.flex-wrap(wrap);
 
 	@media (min-width: @screenTablet) {
-		max-width: @screenTablet - (@gutterWidth * 2);
+		//max-width: @screenTablet - (@gutterWidth * 2);
+		max-width: @screenTabletMaxWidth;
 	}
 	@media (min-width: @screenDesktop) {
-		max-width: @screenDesktop  - (@gutterWidth * 2);
+		//max-width: @screenDesktop  - (@gutterWidth * 2);
+		max-width: @screenDesktopMaxWidth;
 	}
 	@media (min-width: @screenLarge) {
-		max-width: @screenLarge  - (@gutterWidth * 2);
+		//max-width: @screenLarge  - (@gutterWidth * 2);
+		max-width: @screenLargeMaxWidth;
 	}
 
-
-	.content {
+	.row {
 		@media (max-width: @screenTablet) {
 			.contentGutter(@gutterWidthMobile);
 		}
@@ -56,105 +60,159 @@
 		}
 		@media (min-width: @screenLarge) {
 			.contentGutter(@gutterWidthLargeDesktop);
-		}	
+		}
 	}
 }
 
 
-.content.reverse {
+.container-fluid {
+	.row {
+		width: 100%;
+	}
+}
+
+.row-reverse {
 	.content-reverse();
 }
-.col.reverse {
+
+.col-reverse {
 	.col-reverse();
 }
 
-.col {
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12,
+.col-xs-auto, .col-sm-auto, .col-md-auto, .col-lg-auto
+ {
 	.box-sizing;
 	.flex(~"0 0 auto");
 	.flex-direction('column');
 }
+
 .make-position-class(~"-all-");
 
 @media (max-width: @screenTablet) {
-	.make-position-class(~"-mb-");
+	.make-position-class(~"-xs-");
 }
-@media (min-width: @screenTablet) and (max-width: @screenTabletMax) {
-	.make-position-class(~"-");
-}
-@media (min-width: @screenDesktop) and (max-width: @screenDesktopMax) {
-	.make-position-class(~"-dt-");
-}
-@media (min-width: @screenLarge) {
-	.make-position-class(~"-ld-");
-}	
-.makeColPadding(@gutterWidthMobile);
-.makegrid(-mb-);
 
+@media (min-width: @screenTablet) and (max-width: @screenTabletMax) {
+	.make-position-class(~"-sm-");
+}
+
+@media (min-width: @screenDesktop) and (max-width: @screenDesktopMax) {
+	.make-position-class(~"-md-");
+}
+
+@media (min-width: @screenLarge) {
+	.make-position-class(~"-lg-");
+}
+
+.makeColPadding(@gutterWidthMobile);
+.makegrid(-xs-);
 
 .for-each(@col-breaks);
 .-each(@breakpoint) {
-  @media only screen and (min-width: @breakpoint) {
-    .makeColPadding(extract(@col-padding, @i));
-    .makegrid(extract(@col-names, @i));
-  }
+	@media only screen and (min-width: @breakpoint) {
+		.makeColPadding(extract(@col-padding, @i));
+		.makegrid(extract(@col-names, @i));
+	}
 }
 
 .center-block {
 	margin: 0 auto;
 }
 
+.visible-xs-block,
+.visible-xs-inline,
+.visible-xs-inline-block,
+.visible-sm-block,
+.visible-sm-inline,
+.visible-sm-inline-block,
+.visible-md-block,
+.visible-md-inline,
+.visible-md-inline-block,
+.visible-lg-block,
+.visible-lg-inline,
+.visible-lg-inline-block {
+	display: none !important;
+}
 
-// Вспомогательные классы для показа/скрытия элементов на определённых экранах
 @media (max-width: @screenPhoneMax) {
-	.col-mb-hide,
-	.mb-hide,
-	.tablet-block,
-	.col-block,
-	.dt-block,
-	.col-dt-block,
-	.ld-block,
-	.col-ld-block {display: none;}
-	// .mb-block, 
-	// .col-mb-block {display: block;}
+	.visible-xs-block {
+		display: block !important;
+	}
+
+	.visible-xs-inline {
+		display: inline !important;
+	}
+
+	.visible-xs-inline-block {
+		display: inline-block !important;
+	}
 }
 
 @media (min-width: @screenTablet) and (max-width: @screenTabletMax) {
-	.col-hide,
-	.tablet-hide,
-	.mb-block,
-	.col-mb-block,
-	.dt-block,
-	.col-dt-block,
-	.ld-block, 
-	.col-ld-block {display: none;} 
-	// .tablet-block, 
-	// .col-block  {display: block;}
+	.visible-sm-block {
+		display: block !important;
+	}
+
+	.visible-sm-inline {
+		display: inline !important;
+	}
+
+	.visible-sm-inline-block {
+		display: inline-block !important;
+	}
 }
 
 @media (min-width: @screenDesktop) and (max-width: @screenDesktopMax) {
-	.col-dt-hide, 
-	.dt-hide, 
-	.mb-block, 
-	.col-mb-block, 
-	.tablet-block, 
-	.col-block, 
-	.ld-block,
-	.col-ld-block {display: none;}
-	// .dt-block, 
-	// .col-dt-block {display: block;}
+	.visible-md-block {
+		display: block !important;
+	}
+
+	.visible-md-inline {
+		display: inline !important;
+	}
+
+	.visible-md-inline-block {
+		display: inline-block !important;
+	}
 }
 
 @media (min-width: @screenLarge) {
-	.col-ld-hide, 
-	.ld-hide, 
-	.mb-block,
-	.col-mb-block,
-	.tablet-block,
-	.col-block,
-	.dt-block,
-	.col-dt-block {display: none;}
-	// .ld-block, 
-	// .col-ld-block {display: block;}
+	.visible-lg-block {
+		display: block !important;
+	}
+
+	.visible-lg-inline {
+		display: inline !important;
+	}
+
+	.visible-lg-inline-block {
+		display: inline-block !important;
+	}
+}
+
+.hidden-xs {
+	@media (max-width: @screenPhoneMax) {
+		display: none;
+	}
+}
+
+.hidden-sm {
+	@media (min-width: @screenTablet) and (max-width: @screenTabletMax) {
+		display: none;
+	}
+}
+
+.hidden-md {
+	@media (min-width: @screenDesktop) and (max-width: @screenDesktopMax) {
+		display: none;
+	}
+}
+
+.hidden-lg {
+	@media (min-width: @screenLarge) {
+		display: none;
+	}
 }
 
 // Вспомогательные классы для добавления отступов снизу и сверху к колонкам в соответсвии с настройками отступов между колонками
@@ -227,6 +285,7 @@
 		margin-bottom: @gutterWidthLargeDesktop;
 	}
 }
+
 .col-margin-bottom {
 	@media (max-width: @screenTablet) {
 		margin-bottom: @gutterWidthMobile;
@@ -241,6 +300,7 @@
 		margin-bottom: @gutterWidthLargeDesktop;
 	}
 }
+
 .col-margin-top {
 	@media (max-width: @screenTablet) {
 		margin-top: @gutterWidthMobile;

@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LEGRID test page</title>
+	<link rel="stylesheet" href="../dist/legrid.css">
+	<style>
+		body {
+			font: normal 16px/1.42 Arial, sans-serif;
+		}
+		h1,
+		h2 {
+			color: #656565;
+			text-align: center;
+			margin: 0;
+		}
+		.demo {
+			padding: 1em 0;
+			text-align: center;
+			color: #00a6ed;
+			border: solid 1px;
+			background: rgba(58,196,255,.1);
+			border-radius: 3px;
+			transition: all ease .3s;
+		}
+		.demo.active {
+			background: rgba(246,81,29,.2);
+			color: #f6511d;
+		}
+		.demo.inactive {
+			background: rgba(204,204,204,.3);
+			color: #ccc;
+		}
+		.demo.demo-wrapper {
+			padding: 10px;
+			border: 0;
+		}
+		.demo.demo-wrapper .demo.demo-wrapper {
+			background: rgba(58,196,255,.15);
+		}
+
+		.demo.selected {
+			background: #c5e1a5;
+			color: #689f38;
+		}
+
+		.demo-helper {
+			background: rgba(0,0,0,.1);
+		}
+
+	</style>
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-margin">
+				<h1>LEGRID Test Page</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-margin">
+				<h2>Простой пример сетки, перестраивающейся в зависимости от девайса</h2>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container col-margin">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-margin-bottom">
+				<div class="demo">1</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-margin-bottom">
+				<div class="demo">2</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-margin-bottom">
+				<div class="demo">3</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-margin-bottom">
+				<div class="demo">4</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-margin-bottom">
+				<div class="demo">5</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-margin-bottom">
+				<div class="demo">6</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-margin-bottom">
+				<div class="demo">7</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-margin-bottom">
+				<div class="demo">8</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-margin-bottom">
+				<div class="demo">9</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-margin-bottom">
+				<div class="demo">10</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-margin-bottom">
+				<div class="demo">11</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-margin-bottom">
+				<div class="demo">12</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-margin">
+				<h2>Пример смещения колонок</h2>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container col-margin">
+		<div class="row">
+			<div class="col-xs-5 col-sm-offset-2 col-md-3 col-md-offset-4 col-md-4 col-md-offset-7 col-lg-3 col-lg-offset-2 col-margin-bottom">
+				<div class="demo active">col</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-margin-bottom">
+				<div class="demo inactive">col</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-margin-bottom">
+				<div class="demo inactive">col</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-margin-bottom">
+				<div class="demo inactive">col</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-margin-bottom">
+				<div class="demo inactive">col</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-margin">
+				<h2>Колонки с автоматической шириной</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="container col-margin">
+		<div class="row">
+			<div class="col-xs-6 col-sm-4 col-md-auto col-margin-bottom">
+				<div class="demo">1</div>
+			</div>
+			<div class="col-xs-6 col-sm-4 col-md-auto col-margin-bottom">
+				<div class="demo">2</div>
+			</div>
+			<div class="col-xs-6 col-sm-4 col-md-auto col-margin-bottom">
+				<div class="demo">3</div>
+			</div>
+			<div class="col-xs-6 col-sm-4 col-md-auto col-margin-bottom">
+				<div class="demo">4</div>
+			</div>
+			<div class="col-xs-6 col-sm-4 col-md-auto col-margin-bottom">
+				<div class="demo">5</div>
+			</div>
+			<div class="col-xs-6 col-sm-4 col-md-auto col-margin-bottom">
+				<div class="demo">6</div>
+			</div>
+			<div class="hidden-xs hidden-sm col-md-auto col-margin-bottom">
+				<div class="demo active">7</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 col-margin-bottom">
+				<div class="demo inactive">1</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 col-margin-bottom">
+				<div class="demo inactive">2</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 col-margin-bottom">
+				<div class="demo inactive">3</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 col-margin-bottom">
+				<div class="demo inactive">4</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 col-margin-bottom">
+				<div class="demo inactive">5</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 col-margin-bottom">
+				<div class="demo inactive">6</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-4 col-md-auto col-md-min-3 col-margin-bottom">
+				<div class="demo">1</div>
+			</div>
+			<div class="col-xs-6 col-sm-4 col-md-auto col-md-min-3 col-margin-bottom">
+				<div class="demo">2</div>
+			</div>
+			<div class="col-xs-6 col-sm-4 col-md-auto col-md-min-3 col-margin-bottom">
+				<div class="demo">3</div>
+			</div>
+			<div class="col-xs-6 col-sm-4 col-md-auto col-md-min-3 col-margin-bottom">
+				<div class="demo">4</div>
+			</div>
+			<div class="col-xs-6 col-sm-4 col-md-auto col-md-min-3 col-margin-bottom">
+				<div class="demo">5</div>
+			</div>
+			<div class="col-xs-6 col-sm-4 col-md-auto col-md-min-3 col-margin-bottom">
+				<div class="demo">6</div>
+			</div>
+			<div class="col-xs-6 col-sm-4 col-md-auto col-md-min-3 col-margin-bottom">
+				<div class="demo active">7</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-margin">
+				<h2>Вложенные сетки</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="container col-margin">
+		<div class="row col-all-middle">
+			<div class="col-xs-12 col-md-8 col-margin">
+				<div class="demo demo-wrapper">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="demo demo-wrapper">
+								<div class="row">
+									<div class="col-xs-6">
+										<div class="demo">1</div>
+									</div>
+									<div class="col-xs-6">
+										<div class="demo">2</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4 col-margin">
+				<div class="demo demo-wrapper">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-6">
+							<div class="demo">1</div>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-6">
+							<div class="demo">2</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-margin">
+				<h2>Выравнивание ячеек</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="container col-margin">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="h2 mb0">Горизонтальное выравнивание</div>
+				<small>На примере показано как на разных экранах ячейки выравниваются по разному.</small>
+			</div>
+		</div>
+
+		<div class="row col-margin-bottom">
+			<div class="col-xs-12">
+				<div class="demo demo-wrapper">
+					<div class="row col-start col-md-center col-lg-center">
+						<div class="col-xs-2">
+							<div class="demo">1</div>
+						</div>
+						<div class="col-xs-3">
+							<div class="demo">2</div>
+						</div>
+						<div class="col-xs-2">
+							<div class="demo">3</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row col-margin-bottom">
+			<div class="col-xs-12">
+				<div class="demo demo-wrapper">
+					<div class="row col-end col-md-start col-lg-center">
+						<div class="col-xs-2">
+							<div class="demo">1</div>
+						</div>
+						<div class="col-xs-3">
+							<div class="demo">2</div>
+						</div>
+						<div class="col-xs-2">
+							<div class="demo">3</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row col-margin-bottom">
+			<div class="col-xs-12">
+				<div class="demo demo-wrapper">
+					<div class="row col-center col-md-end col-lg-center">
+						<div class="col-xs-2">
+							<div class="demo">1</div>
+						</div>
+						<div class="col-xs-3">
+							<div class="demo">2</div>
+						</div>
+						<div class="col-xs-2">
+							<div class="demo">3</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<hr>
+				<div class="h2 mb0">Вертикальное выравнивание</div>
+				<small>
+					На примере показано вертикальное выравнивание со вложенными сетками.
+				</small>
+			</div>
+		</div>
+
+		<div class="row col-margin-bottom">
+			<div class="col-xs-12">
+				<div class="demo demo-wrapper">
+					<div class="row col-all-top">
+						<div class="col-xs-4">
+							<div class="demo">1</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="demo demo-wrapper">
+								<div class="col-xs-12">
+									<div class="demo col-margin">2</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="demo">3</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row col-margin-bottom">
+			<div class="col-xs-12">
+				<div class="demo demo-wrapper">
+					<div class="row col-all-middle">
+						<div class="col-xs-4">
+							<div class="demo">1</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="demo demo-wrapper">
+								<div class="col-xs-12">
+									<div class="demo col-margin">2</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="demo">3</div>
+						</div>
+
+						<div class="col-xs-4">
+							<div class="demo demo-wrapper">
+								<div class="col-xs-12">
+									<div class="demo col-margin">4</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="demo">5</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="demo">6</div>
+						</div>
+
+						<div class="col-xs-4">
+							<div class="demo">7</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="demo">8</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="demo demo-wrapper">
+								<div class="col-xs-12">
+									<div class="demo col-margin">9</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row col-margin-bottom">
+			<div class="col-xs-12">
+				<div class="demo demo-wrapper">
+					<div class="row col-all-bottom">
+						<div class="col-xs-4">
+							<div class="demo">1</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="demo demo-wrapper">
+								<div class="col-xs-12">
+									<div class="demo col-margin">2</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="demo">3</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-margin">
+				<h2>Распределение свободного места</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="container col-margin">
+		<div class="row col-all-between">
+			<div class="col-xs-3 col-margin-bottom">
+				<div class="demo">col</div>
+			</div>
+			<div class="col-xs-3 col-margin-bottom">
+				<div class="demo">col</div>
+			</div>
+			<div class="col-xs-3 col-margin-bottom">
+				<div class="demo">col</div>
+			</div>
+		</div>
+
+		<div class="row col-all-center">
+			<div class="col-xs-3 col-margin-bottom">
+				<div class="demo inactive">col</div>
+			</div>
+			<div class="col-xs-3 col-margin-bottom">
+				<div class="demo inactive">col</div>
+			</div>
+			<div class="col-xs-3 col-margin-bottom">
+				<div class="demo inactive">col</div>
+			</div>
+		</div>
+
+		<div class="row col-all-around">
+			<div class="col-xs-3 col-margin-bottom">
+				<div class="demo">col</div>
+			</div>
+			<div class="col-xs-3 col-margin-bottom">
+				<div class="demo">col</div>
+			</div>
+			<div class="col-xs-3 col-margin-bottom">
+				<div class="demo">col</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-margin">
+				<h2>Вспомогательные классы сетки</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>Показ/скрытие блоков</h3>
+			</div>
+		</div>
+
+		<div class="row col-middle">
+
+			<div class="col-xs-12 col-sm-3 col-margin-bottom">
+				<div class="demo">
+				<span class="hidden-xs">
+					Этот текст скроется на мобильном
+				</span>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-3 col-margin-bottom">
+				<div class="demo">
+				<span class="hidden-sm">
+					Этот текст скроется на планшете
+				</span>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-3 col-margin-bottom">
+				<div class="demo">
+				<span class="hidden-md">
+					Этот текст скроется на десктопе
+				</span>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-3 col-margin-bottom">
+				<div class="demo">
+				<span class="hidden-lg">
+					Этот текст скроется на большом десктопе
+				</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row col-middle">
+
+			<div class="col-xs-12 col-sm-3 col-margin-bottom">
+				<div class="demo">
+				<span class="visible-xs-block">
+					Этот текст отобразится на мобильном
+				</span>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-3 col-margin-bottom">
+				<div class="demo">
+				<span class="visible-sm-block">
+					Этот текст отобразится на планшете
+				</span>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-3 col-margin-bottom">
+				<div class="demo">
+				<span class="visible-md-block">
+					Этот текст отобразится на десктопе
+				</span>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-3 col-margin-bottom">
+				<div class="demo">
+				<span class="visible-lg-block">
+					Этот текст отобразится на большом десктопе
+				</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>Отступы</h3>
+			</div>
+		</div>
+		<div class="row col-xs-middle">
+			<div class="col-xs-12 col-sm-4 col-margin-bottom">
+				<div class="demo"><div class="d-ib demo-helper col-padding-top"><code>.col-padding-top</code></div></div>
+			</div>
+			<div class="col-xs-12 col-sm-4 col-margin-bottom">
+				<div class="demo"><div class="d-ib demo-helper col-padding"><code>.col-padding</code></div></div>
+			</div>
+			<div class="col-xs-12 col-sm-4 col-margin-bottom">
+				<div class="demo"><div class="d-ib demo-helper col-padding-bottom"><code>.col-padding-bottom</code></div></div>
+			</div>
+		</div>
+		<div class="row col-xs-middle">
+			<div class="col-xs-12 col-sm-4 col-margin-bottom">
+				<div class="demo"><div class="d-ib demo-helper col-margin-top"><code>.col-margin-top</code></div></div>
+			</div>
+			<div class="col-xs-12 col-sm-4 col-margin-bottom">
+				<div class="demo"><div class="d-ib demo-helper col-margin"><code>.col-margin</code></div></div>
+			</div>
+			<div class="col-xs-12 col-sm-4 col-margin-bottom">
+				<div class="demo"><div class="d-ib demo-helper col-margin-bottom"><code>.col-margin-bottom</code></div></div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-margin">
+				<h2>Обратный порядок вывода</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="container col-margin">
+		<div class="row row-reverse">
+			<div class="col-xs-2">
+				<div class="demo">1</div>
+			</div>
+			<div class="col-xs-2">
+				<div class="demo">2</div>
+			</div>
+			<div class="col-xs-2">
+				<div class="demo">3</div>
+			</div>
+			<div class="col-xs-2">
+				<div class="demo">4</div>
+			</div>
+			<div class="col-xs-2">
+				<div class="demo active">5</div>
+			</div>
+			<div class="col-xs-2">
+				<div class="demo">6</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-margin">
+				<h2>Изменение порядка</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="container col-margin">
+		<div class="row">
+			<div class="col-xs-12 col-sm-3">
+				<div class="demo">1</div>
+			</div>
+			<div class="col-xs-12 col-sm-3 col-all-first">
+				<div class="demo active">2 <small>first</small></div>
+			</div>
+			<div class="col-xs-12 col-sm-3">
+				<div class="demo">3</div>
+			</div>
+			<div class="col-xs-12 col-sm-3">
+				<div class="demo">4</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<hr>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-3">
+				<div class="demo">1</div>
+			</div>
+			<div class="col-xs-12 col-sm-3 col-all-last">
+				<div class="demo active">2 <small>last</small></div>
+			</div>
+			<div class="col-xs-12 col-sm-3">
+				<div class="demo">3</div>
+			</div>
+			<div class="col-xs-12 col-sm-3">
+				<div class="demo">4</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<hr>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-3">
+				<div class="demo">1</div>
+			</div>
+			<div class="col-xs-12 col-sm-3 col-all-last">
+				<div class="demo active">2 <small>last</small></div>
+			</div>
+			<div class="col-xs-12 col-sm-3 col-all-first">
+				<div class="demo active">3 <small>first</small></div>
+			</div>
+			<div class="col-xs-12 col-sm-3">
+				<div class="demo">4</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script>
+
+		var demoBlock = document.getElementsByClassName('demo');
+
+
+		document.addEventListener('click', function (e) {
+			var el = e.target,
+				className = 'selected',
+				demoClass = 'demo';
+
+			if(hasClass(el, 'demo')) {
+				if (el.classList) {
+					el.classList.toggle(className);
+				}
+				else {
+					var classes = el.className.split(' ');
+					var existingIndex = classes.indexOf(className);
+
+					if (existingIndex >= 0) {
+						classes.splice(existingIndex, 1);
+					}
+					else {
+						classes.push(className);
+					}
+					el.className = classes.join(' ');
+				}
+			}
+
+		});
+
+		function hasClass(el, className) {
+			if (el.classList) {
+				return el.classList.contains(className);
+			}
+			else {
+				return new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
+			}
+		}
+
+
+	</script>
+</body>
+</html>

@@ -1,31 +1,47 @@
 // Переменные
 @columns:                 12;   // Количество колонок
+//@columns:                 @grid-columns;
 
 // Рсстояние между колонок лучше указывать кратное двум
 @gutterWidthMobile:       10px; // Мобильники и выше
 @gutterWidth:             20px; // Планшеты и выше
+
 @gutterWidthDesktop:      30px; // Десктоп и выше
+//@gutterWidthDesktop:      @grid-gutter-width;
+
 @gutterWidthLargeDesktop: 40px; // Большой десткоп
 
 
 // Breakpoints
 
 @screenPhone: 	481px;                  // screenPhone
+// @screenPhone: 	@screen-xs;
+
 @screenTablet: 	768px;                  // screenTablet
+//@screenTablet: 	@screen-sm;
+
 @screenDesktop: 992px;                  // screenDesktop
+//@screenDesktop: @screen-md;
+
 @screenLarge:   1280px;                 // screenLarge
+//@screenLarge:   @screen-lg;
 
 @screenPhoneMax: (@screenTablet - 1);   // screenPhoneMax
 @screenTabletMax: (@screenDesktop - 1); // screenTabletMax
 @screenDesktopMax: (@screenLarge - 1);  // screenDesktopMax
 
 // Размеры контейнера для разных экранов
-@screenTabletMaxWidth: 750px; // Планшеты
-@screenDesktopMaxWidth: 970px; // Десктопы
-@screenLargeMaxWidth: 1170px; // Большие десктопы
+@screenTabletMaxWidth: 750px;  // screenTabletMaxWidth
+//@screenTabletMaxWidth: @container-sm;
+
+@screenDesktopMaxWidth: 970px; // screenDesktopMaxWidth
+//@screenDesktopMaxWidth: @container-md;
+
+@screenLargeMaxWidth: 1170px;  // screenLargeMaxWidth
+//@screenLargeMaxWidth: @container-lg;
 
 
 // Массивы с данными для формирования классов колонок
-@col-names: -sm-, -md-, -lg-;
-@col-breaks: @screenTablet, @screenDesktop, @screenLarge;
-@col-padding: @gutterWidth, @gutterWidthDesktop, @gutterWidthLargeDesktop;
+@col-names:   -sm-,          -md-,                -lg-;
+@col-breaks:  @screenTablet, @screenDesktop,      @screenLarge;
+@col-padding: @gutterWidth,  @gutterWidthDesktop, @gutterWidthLargeDesktop;

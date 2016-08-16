@@ -1,3 +1,16 @@
-.idea
+# IDE #
+.idea/
+*.swp
 
+# Logs
+logs
+*.log
+npm-debug.log*
 
+# Node Files #
+/node_modules
+/bower_components
+npm-debug.log
+
+# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+.grunt

@@ -1,18 +1,28 @@
+.@{colClassName}-reverse {
+	#legrid.col-reverse();
+}
+
 #legrid {
 	&.col {
-		 box-sizing: border-box;
-		 flex: 0 0 auto;
-		 flex-direction: column;
-	 }
-
-	&.col-auto {
-		flex-grow: 1;
-		flex-basis: 0;
-		max-width: 100%;
+		box-sizing: border-box;
+		flex: 0 0 auto;
+		flex-direction: column;
+	}
+	.col-reverse() {
+		flex-direction: row-reverse;
+		flex-wrap: wrap-reverse;
 	}
 
-	.makeColCommon(@colNum) {
-		.makeColCommonLoop(@colNum);
+	& when not (@addColAutoForPrefixes = true) {
+		&.col-auto {
+			flex-grow: 1;
+			flex-basis: 0;
+			max-width: 100%;
+		}
+	}
+
+	.makeColCommon(@prefix) {
+		.makeColCommonLoop(@columns);
 
 		// Col loop
 		.makeColCommonLoop (@colNum, @colPrefixes: @colPrefixes, @i: 1) when (@i <= length(@colPrefixes)) {
@@ -20,7 +30,6 @@
 
 			& when (@i > 1) {
 				.@{colClassName}-@{screen}-@{colNum} {
-					//.col;
 					&:extend(#legrid.col);
 				}
 			}
@@ -36,6 +45,18 @@
 			@screen: extract(@colPrefixes, @i);
 			@width: ((100% / @columns) * @colNum);
 
+			._colClasses() {
+				.@{colClassName}-@{screen}-@{colNum}-min {
+					min-width: @width;
+				}
+
+				.@{colClassName}-@{screen}-@{colNum} {
+					flex-basis: @width;
+					max-width: @width;
+					&:extend(#legrid.colCommonStyles);
+				}
+			}
+
 			& when (@i = 1) { // For col-all
 				.@{colClassName}-@{screen}-@{colNum} {
 					// Code for col-all-XX
@@ -43,12 +64,10 @@
 			}
 
 			& when (@i = 2) {
-				@_min: extract(@colBreakMin, @i);
+				@_max: extract(@colBreakMax, @i);
 
-				@media only screen and (max-width: @_min) {
-					.@{colClassName}-@{screen}-@{colNum} {
-						max-width: @width;
-					}
+				@media only screen and (max-width: @_max) {
+					._colClasses();
 				}
 			}
 
@@ -57,10 +76,7 @@
 				@_max: extract(@colBreakMax, @i);
 
 				@media only screen and (min-width: @_min) and (max-width: @_max) {
-					.@{colClassName}-@{screen}-@{colNum} {
-						max-width: @width;
-						&:extend(#legrid.colCommonStyles);
-					}
+					._colClasses();
 				}
 			}
 
@@ -68,23 +84,64 @@
 		}
 	}
 
-	.makeColAuto() {
-	.makeColAutoLoop();
+	.makeColAdditional() {
+		.makeColAdditionalLoop();
 
-	.makeColAutoLoop(@colPrefixes: @colPrefixes, @i: 1) when (@i <= length(@colPrefixes)) {
-		@screen: extract(@colPrefixes, @i);
+		.makeColAdditionalLoop(@colPrefixes: @colPrefixes, @i: 1) when (@i <= length(@colPrefixes)) {
+			@screen: extract(@colPrefixes, @i);
 
-		.@{colClassName}-@{screen}-auto {
-			&:extend(#legrid.col);
-			&:extend(#legrid.col-auto);
+			.col-auto() {
+				flex-grow: 1;
+				flex-basis: 0;
+				max-width: 100%;
+			}
+
+			.@{colClassName}-@{screen}-auto {
+				&:extend(#legrid.col);
+				& when not (@addColAutoForPrefixes = true) {
+					&:extend(#legrid.col-auto);
+				}
+			}
+
+			& when (@i = 2) {
+				@_max: extract(@colBreakMax, @i);
+
+				@media only screen and (max-width: @_max) {
+					& when (@addColAutoForPrefixes = true) {
+						.@{colClassName}-@{screen}-auto {
+							.col-auto;
+						}
+					}
+
+					& when (@addColReverseForPrefixes = true) {
+						.@{colClassName}-@{screen}-reverse {
+							#legrid.col-reverse;
+						}
+					}
+
+				}
+			}
+
+			& when (@i > 2) {
+				@_min: extract(@colBreakMin, @i);
+				@_max: extract(@colBreakMax, @i);
+
+				@media only screen and (min-width: @_min) and (max-width: @_max) {
+					& when (@addColAutoForPrefixes = true) {
+						.@{colClassName}-@{screen}-auto {
+							.col-auto;
+						}
+					}
+
+					& when (@addColReverseForPrefixes = true) {
+						.@{colClassName}-@{screen}-reverse {
+							#legrid.col-reverse;
+						}
+					}
+				}
+			}
+
+			.makeColAdditionalLoop (@colPrefixes, @i + 1);
 		}
-
-		.makeColAutoLoop (@colPrefixes, @i + 1);
 	}
-}
-
-	.colStyles() {
-
-	}
-
 }

@@ -9,5 +9,13 @@
 @colPrefixes:  all,    xs,        sm,        md,        lg;
 @colBreakMin: -1,     480px,     768px,     992px,     1280px;
 @colBreakMax: -1,     767px,     991px,     1279px,    3841px;
-@colMaxWidth: -1,     750px,     970px,     1170px,    3600px;
+@colMaxWidth: -1,     460px,     750px,     970px,    1170px;
 @colPaddings: -1,     10px,      20px,      20px,      30px;
+
+// Add class for every prefix
+// They will work only for specific screens
+// ------------------------------------
+// Add .col-XX-auto
+@addColAutoForPrefixes: false;
+// Add .col-XX-reverse
+@addColReverseForPrefixes: false;

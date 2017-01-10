@@ -1,0 +1,60 @@
+#legrid {
+
+	.rowGutter(@gutter) {
+		margin-left: -@gutter / 2;
+		margin-right: -@gutter / 2;
+	}
+
+	.rowStyles(@maxWidth, @rowGutter) {
+		.@{rowClassName} {
+			max-width: @maxWidth;
+
+			.@{rowClassName} {
+				#legrid.rowGutter(@rowGutter);
+			}
+		}
+	}
+
+	.makeRowMixin() {
+		.@{rowClassName} {
+			margin: 0 auto;
+			box-sizing: border-box;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+
+			&-reverse {
+				flex-direction: row-reverse;
+				flex-wrap: wrap-reverse;
+			}
+		}
+
+		.makeRowLoop();
+
+		// Col loop
+		.makeRowLoop (@colPrefixes: @colPrefixes, @i: 1) when (@i <= length(@colPrefixes)) {
+			@screen: extract(@colPrefixes, @i);
+			@maxWidth: extract(@colMaxWidth, @i);
+			@rowGutter: extract(@colPaddings, @i);
+
+			& when (@i = 2) {
+				@_min: extract(@colBreakMin, @i);
+
+				@media only screen and (max-width: @_min) {
+					#legrid.rowStyles(@maxWidth, @rowGutter);
+				}
+			}
+
+			& when (@i > 2) {
+				@_min: extract(@colBreakMin, @i);
+				@_max: extract(@colBreakMax, @i);
+
+				@media only screen and (min-width: @_min) and (max-width: @_max) {
+					#legrid.rowStyles(@maxWidth, @rowGutter);
+				}
+			}
+
+			.makeRowLoop (@colPrefixes, @i + 1);
+		}
+	}
+}

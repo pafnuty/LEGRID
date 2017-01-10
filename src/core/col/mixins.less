@@ -1,0 +1,90 @@
+#legrid {
+	&.col {
+		 box-sizing: border-box;
+		 flex: 0 0 auto;
+		 flex-direction: column;
+	 }
+
+	&.col-auto {
+		flex-grow: 1;
+		flex-basis: 0;
+		max-width: 100%;
+	}
+
+	.makeColCommon(@colNum) {
+		.makeColCommonLoop(@colNum);
+
+		// Col loop
+		.makeColCommonLoop (@colNum, @colPrefixes: @colPrefixes, @i: 1) when (@i <= length(@colPrefixes)) {
+			@screen: extract(@colPrefixes, @i);
+
+			& when (@i > 1) {
+				.@{colClassName}-@{screen}-@{colNum} {
+					//.col;
+					&:extend(#legrid.col);
+				}
+			}
+			.makeColCommonLoop (@colNum, @colPrefixes, @i + 1);
+		}
+	}
+
+	.makeCol(@colNum) {
+		.makeColLoop(@colNum);
+
+		// Col loop
+		.makeColLoop (@colNum, @colPrefixes: @colPrefixes, @i: 1) when (@i <= length(@colPrefixes)) {
+			@screen: extract(@colPrefixes, @i);
+			@width: ((100% / @columns) * @colNum);
+
+			& when (@i = 1) { // For col-all
+				.@{colClassName}-@{screen}-@{colNum} {
+					// Code for col-all-XX
+				}
+			}
+
+			& when (@i = 2) {
+				@_min: extract(@colBreakMin, @i);
+
+				@media only screen and (max-width: @_min) {
+					.@{colClassName}-@{screen}-@{colNum} {
+						max-width: @width;
+					}
+				}
+			}
+
+			& when (@i > 2) {
+				@_min: extract(@colBreakMin, @i);
+				@_max: extract(@colBreakMax, @i);
+
+				@media only screen and (min-width: @_min) and (max-width: @_max) {
+					.@{colClassName}-@{screen}-@{colNum} {
+						max-width: @width;
+						&:extend(#legrid.colCommonStyles);
+					}
+				}
+			}
+
+			.makeColLoop (@colNum, @colPrefixes, @i + 1);
+		}
+	}
+
+	.makeColAuto() {
+	.makeColAutoLoop();
+
+	.makeColAutoLoop(@colPrefixes: @colPrefixes, @i: 1) when (@i <= length(@colPrefixes)) {
+		@screen: extract(@colPrefixes, @i);
+
+		.@{colClassName}-@{screen}-auto {
+			&:extend(#legrid.col);
+			&:extend(#legrid.col-auto);
+		}
+
+		.makeColAutoLoop (@colPrefixes, @i + 1);
+	}
+}
+
+	.colStyles() {
+
+	}
+
+}

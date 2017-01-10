@@ -1,0 +1,13 @@
+
+#legrid {
+	.makeColumns() {
+		#legrid.makeColAuto();
+		.makeColumnsLoop();
+
+		.makeColumnsLoop(@col: @columns) when (@col > 0) {
+			.makeColumnsLoop (@col - 1);
+			#legrid.makeColCommon(@col);
+			#legrid.makeCol(@col);
+		}
+	}
+}

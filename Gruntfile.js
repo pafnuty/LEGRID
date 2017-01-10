@@ -1,21 +1,16 @@
 'use strict';
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
+
+	var pkg = grunt.file.readJSON('package.json');
+	var banner = pkg.title + ' — ' + pkg.description + '\n'
+		+ 'Version: ' + pkg.version + '\n'
+		+ 'Date: ' + grunt.template.today('dd.mm.yyyy') + '\n'
+		+ 'Author: ' + pkg.author.name + '\n'
+		+ 'HomePage: ' + pkg.homepage + '\n'
+		+ 'License: ' + pkg.licenses[0]['name'];
 
 	grunt.initConfig({
-
-		// Banner strind
-		pkg: grunt.file.readJSON('package.json'),
-		banner: '/* <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-		'<%= grunt.template.today("dd.mm.yyyy") %>\n' +
-		'<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-		'* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-		' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
-
-		// clean
-		clean: {
-			css: ['dist']
-		},
 
 		// less build
 		less: {
@@ -26,56 +21,61 @@ module.exports = function(grunt) {
 			}
 		},
 
-		// postcss (autoprefixer, sorting, cssnano)
-		postcss: {
-			options: {
-				map: false,
-				processors: [
-					require('autoprefixer')({
-						browsers: ['last 2 versions']
-					}),
-					require('postcss-sorting')({
-						'sort-order': 'csscomb'
-					}),
-					require('postcss-flexbugs-fixes'),
-					require('cssnano')({
-						dist: {
-							files: {
-								'dist/legrid.min.css': 'dist/legrid.css'
-							}
-						},
-						removeComments: {
-							removeAll: true
-						}
-					})
-				]
-			},
-			dist: {
-				// src: 'dist/legrid.css',
-				files: {
-					'dist/legrid.min.css': 'dist/legrid.css'
-				}
+		// media queries packer
+		css_mqpacker: {
+			main: {
+				options: {
+					map: false,
+					sort: false
+				},
+				expand: true,
+				src: 'dist/legrid.css'
 			}
 		},
 
-		// add banner
-		addbanner: {
+		// postcss (autoprefixer, sorting, cssnano)
+		postcss: {
 			dist: {
 				options: {
-					position: 'top',
-					banner: '<%= banner %>',
-					linebreak: false
+					map: false,
+					processors: [
+						require('autoprefixer')({
+							browsers: ['last 2 versions']
+						}),
+						require('postcss-sorting')({
+							'sort-order': 'csscomb'
+						}),
+						require('postcss-move-media'),
+						require('postcss-flexbugs-fixes'),
+						require('postcss-banner')({
+							banner: banner,
+							important: true
+						})
+					]
 				},
-				files: {
-					src: ['css/*.css']
-				}
+				src: 'dist/legrid.css',
+				dest: 'dist/legrid.css'
+			},
+			compress: {
+				options: {
+					map: false,
+					processors: [
+						require('cssnano')({
+							removeComments: {
+								removeAll: true
+							}
+						})
+					]
+				},
+				src: 'dist/legrid.css',
+				dest: 'dist/legrid.min.css'
 			}
 		},
 
 		// Watch
 		watch: {
 			less: {
-				files: 'less/**/*.less',
+				files: 'src/**/*.less',
 				tasks: ['css']
 			}
 		}
@@ -88,5 +88,5 @@ module.exports = function(grunt) {
 
 	// Default task.
 	grunt.registerTask('default', ['css']);
-	grunt.registerTask('css', ['less', 'postcss']);
+	grunt.registerTask('css', ['less', 'css_mqpacker', 'postcss']);
 };

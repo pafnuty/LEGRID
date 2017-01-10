@@ -1,7 +1,7 @@
 {
   "name": "legrid",
   "version": "3.0.0",
-  "description": "Simple, effective and easy grid on FlexBox and less.",
+  "description": "Simple, effective and easy grid on flexBox and less.",
   "main": "src/less/legrid.less",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

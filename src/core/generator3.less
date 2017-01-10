@@ -1,0 +1,43 @@
+
+#legrid {
+	.makeColumns(@col: @columns) when (@col > 0) {
+		#legrid.makeColumns (@col - 1);
+
+		#legrid.makeCol(@col);
+	}
+
+	.makeCol (@colNum, @colPrefixes: @colPrefixes, @i: 1) when (@i <= length(@colPrefixes)) {
+		@screen: extract(@colPrefixes, @i);
+		@width: ((100% / @columns) * @colNum);
+
+		& when (@i = 1) { // For col-all
+			.@{colClassName}-@{screen}-@{colNum} {
+				// Code for col-all-XX
+			}
+		}
+
+		& when (@i = 2) {
+			@_min: extract(@colBreakMin, @i);
+
+			@media only screen and (max-width: @_min) {
+				.@{colClassName}-@{screen}-@{colNum} {
+					max-width: @width;
+				}
+			}
+		}
+
+		& when (@i > 2) {
+			@_min: extract(@colBreakMin, @i);
+			@_max: extract(@colBreakMax, @i);
+
+			@media only screen and (min-width: @_min) and (max-width: @_max) {
+				.@{colClassName}-@{screen}-@{colNum} {
+					max-width: @width;
+				}
+			}
+		}
+
+		#legrid.makeCol (@colNum, @colPrefixes, @i + 1);
+	}
+
+}

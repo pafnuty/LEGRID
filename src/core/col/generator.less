@@ -2,12 +2,19 @@
 #legrid {
 	.makeColumns() {
 		#legrid.makeColAdditional();
+		#legrid.makeColPositionAll();
+
 		.makeColumnsLoop();
 
-		.makeColumnsLoop(@col: @columns) when (@col > 0) {
-			.makeColumnsLoop (@col - 1);
-			#legrid.makeColCommon(@col);
-			#legrid.makeCol(@col);
+		.makeColumnsLoop(@i: 1) when (@i <= length(@colPrefixes)) {
+
+			#legrid.makeColCommon(@i);
+			#legrid.makeColForPrefix(@i);
+			#legrid.makeColPaddingForPrefix(@i);
+			#legrid.makeColPositionForPrefix(@i);
+
+			.makeColumnsLoop (@i + 1);
 		}
+
 	}
 }

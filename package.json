@@ -37,6 +37,8 @@
     "load-grunt-tasks": "^3.5.2",
     "postcss-banner": "^3.0.0",
     "postcss-flexbugs-fixes": "^2.1.0",
+    "postcss-merge-rules": "^2.1.1",
+    "postcss-merge-selectors": "0.0.6",
     "postcss-move-media": "^1.0.0-pre",
     "postcss-sorting": "^1.7.0"
   }

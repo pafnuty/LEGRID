@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
 	var pkg = grunt.file.readJSON('package.json');
 	var banner = pkg.title + ' — ' + pkg.description + '\n'
@@ -46,6 +46,7 @@ module.exports = function (grunt) {
 							'sort-order': 'csscomb'
 						}),
 						require('postcss-move-media'),
+						require('postcss-merge-rules')(),
 						require('postcss-flexbugs-fixes'),
 						require('postcss-banner')({
 							banner: banner,
@@ -77,6 +78,10 @@ module.exports = function (grunt) {
 			less: {
 				files: 'src/**/*.less',
 				tasks: ['css']
+			},
+			dev: {
+				files: 'src/**/*.less',
+				tasks: ['dev']
 			}
 		}
 	});
@@ -88,5 +93,6 @@ module.exports = function (grunt) {
 
 	// Default task.
 	grunt.registerTask('default', ['css']);
+	grunt.registerTask('dev', ['less', 'css_mqpacker']);
 	grunt.registerTask('css', ['less', 'css_mqpacker', 'postcss']);
 };

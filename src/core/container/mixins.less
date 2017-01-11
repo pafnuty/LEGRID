@@ -14,7 +14,7 @@
 			}
 		}
 
-		.@{containerClassName}-fluid {
+		.@{containerClassName}@{sep}fluid {
 			.@{rowClassName} {
 				&:extend(#legrid.w100p);
 			}
@@ -29,28 +29,45 @@
 
 		// Container loop
 		.makeContainerLoop (@colPrefixes: @colPrefixes, @i: 1) when (@i <= length(@colPrefixes)) {
-			@screen: extract(@colPrefixes, @i);
+			@prefixNum: @i;
 			@containerGutter: extract(@colPaddings, @i);
 
-			& when (@i = 2) {
-				@_max: extract(@colBreakMax, @i);
-
-				@media only screen and (max-width: @_max) {
-					.@{containerClassName} {
-						#legrid.containerGutter(@containerGutter);
-					}
-				}
-			}
-
-			& when (@i > 2) {
+			.@{containerClassName} {
 				@_min: extract(@colBreakMin, @i);
 				@_max: extract(@colBreakMax, @i);
 
-				@media only screen and (min-width: @_min) and (max-width: @_max) {
-					.@{containerClassName} {
-						#legrid.containerGutter(@containerGutter);
+				._gutter() {
+					#legrid.containerGutter(@containerGutter);
+				}
+
+				& when (@prefixNum = 1) {
+					._gutter;
+				}
+				& when (@prefixNum > 1) {
+
+					& when (@_min = false) and not (@_max = false) {
+						@media only screen and (max-width: @_max) {
+							._gutter;
+						}
+					}
+
+					& when not (@_min = false) and (@_max = false) {
+						@media only screen and (min-width: @_min) {
+							._gutter;
+						}
+					}
+
+					& when (@_min = false) and (@_max = false) {
+						._gutter;
+					}
+
+					& when not (@_min = false) and not (@_max = false) {
+						@media only screen and (min-width: @_min) and (max-width: @_max) {
+							._gutter;
+						}
 					}
 				}
+
 			}
 
 			.makeContainerLoop (@colPrefixes, @i + 1);

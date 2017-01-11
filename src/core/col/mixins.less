@@ -147,7 +147,7 @@
 		@prefix: extract(@colPrefixes, @prefixNum);
 
 		.makeColPaddingForPrefixLoop();
-		.makeColPaddingForPrefixLoop(@i: 0) when (@i < @columns) {
+		.makeColPaddingForPrefixLoop(@i: 0) when (@i < (@columns + 1)) {
 			@colNum: @i;
 			@padding: extract(@colPaddings, @prefixNum);
 

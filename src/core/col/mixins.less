@@ -2,6 +2,7 @@
 	&:extend(#legrid.col-reverse);
 }
 
+// Column position class suffix list (for make loop)
 @positions: start, center, end, top, middle, bottom, around, between, first, last;
 
 #legrid {
@@ -96,33 +97,43 @@
 
 				// For first prefix we need code without @media wrapper
 				& when (@prefixNum = 1) {
-					._colClasses();
+					._colClasses;
 				}
 				& when (@prefixNum > 1) {
 					@_min: extract(@colBreakMin, @prefixNum);
 					@_max: extract(@colBreakMax, @prefixNum);
 
-					& when (@_min = false) and not (@_max = false) {
-						@media only screen and (max-width: @_max) {
-							._colClasses();
-						}
-					}
-
-					& when not (@_min = false) and (@_max = false) {
+					& when not (@_min = false) {
 						@media only screen and (min-width: @_min) {
-							._colClasses();
+							._colClasses;
 						}
 					}
 
 					& when (@_min = false) and (@_max = false) {
-						._colClasses();
+						._colClasses;
 					}
 
-					& when not (@_min = false) and not (@_max = false) {
-						@media only screen and (min-width: @_min) and (max-width: @_max) {
-							._colClasses();
-						}
-					}
+					//& when (@_min = false) and not (@_max = false) {
+					//	@media only screen and (max-width: @_max) {
+					//		._colClasses();
+					//	}
+					//}
+					//
+					//& when not (@_min = false) and (@_max = false) {
+					//	@media only screen and (min-width: @_min) {
+					//		._colClasses();
+					//	}
+					//}
+					//
+					//& when (@_min = false) and (@_max = false) {
+					//	._colClasses();
+					//}
+					//
+					//& when not (@_min = false) and not (@_max = false) {
+					//	@media only screen and (min-width: @_min) and (max-width: @_max) {
+					//		._colClasses();
+					//	}
+					//}
 				}
 			}
 
@@ -137,111 +148,63 @@
 
 		.makeColPaddingForPrefixLoop();
 		.makeColPaddingForPrefixLoop(@i: 0) when (@i < @columns) {
-			@colNum: @i + 1;
+			@colNum: @i;
 			@padding: extract(@colPaddings, @prefixNum);
 
 			._colPadding() {
 				padding-right: @padding;
 				padding-left: @padding;
 			}
-			.@{colClassName}@{sep}@{prefix}@{sep}@{colNum} {
-				@_min: extract(@colBreakMin, @prefixNum);
-				@_max: extract(@colBreakMax, @prefixNum);
 
-				& when (@prefixNum = 1) {
-					._colPadding();
+			._makePaddingClass() {
+
+				._makePaddingClassTo(@className) {
+
+					.@{className} {
+						@_min: extract(@colBreakMin, @prefixNum);
+						@_max: extract(@colBreakMax, @prefixNum);
+
+						& when (@prefixNum = 1) {
+							._colPadding();
+						}
+						& when (@prefixNum > 1) {
+
+							& when not (@_min = false) {
+								@media only screen and (min-width: @_min) {
+									._colPadding;
+								}
+							}
+
+							& when (@_min = false) and (@_max = false) {
+								._colPadding;
+							}
+
+						}
+					}
 				}
-				& when (@prefixNum > 1) {
 
-					& when (@_min = false) and not (@_max = false) {
-						@media only screen and (max-width: @_max) {
-							._colPadding;
-						}
-					}
-
-					& when not (@_min = false) and (@_max = false) {
-						@media only screen and (min-width: @_min) {
-							._colPadding;
-						}
-					}
-
-					& when (@_min = false) and (@_max = false) {
-						._colPadding;
-					}
-
-					& when not (@_min = false) and not (@_max = false) {
-						@media only screen and (min-width: @_min) and (max-width: @_max) {
-							._colPadding;
-						}
-					}
+				& when (@colNum = 0) {
+					@colClassNameCalculated: e(%('%s%s%s%s%s', @colClassName, @sep, @prefix, @sep, auto));
+					._makePaddingClassTo(@colClassNameCalculated);
+				}
+				& when (@colNum > 0) {
+					@colClassNameCalculated: e(%('%s%s%s%s%s', @colClassName, @sep, @prefix, @sep, @colNum));
+					._makePaddingClassTo(@colClassNameCalculated);
 				}
 			}
+
+			._makePaddingClass;
 
 			.makeColPaddingForPrefixLoop(@i + 1);
-		}
-	}
-
-	.makeColPaddingForPrefix1(@prefixNum) {
-		@prefix: extract(@colPrefixes, @prefixNum);
-
-		.makeColPaddingForPrefix1Loop();
-		.makeColPaddingForPrefix1Loop(@i: 0) when (@i < @columns) {
-			@colNum: @i + 1;
-
-			@padding: extract(@colPaddings, @prefixNum);
-
-			.@{prefixNum} {
-				font-size: 15px;
-			}
-			._colPadding() {
-				.@{colClassName}@{sep}@{prefix}@{sep}@{colNum} {
-					padding-right: @padding;
-					padding-left: @padding;
-
-				}
-			}
-
-			// For first prefix we need code without @media wrapper
-			& when (@prefixNum = 1) {
-				._colPadding();
-			}
-			& when (@prefixNum > 1) {
-				@_min: extract(@colBreakMin, @prefixNum);
-				@_max: extract(@colBreakMax, @prefixNum);
-
-				& when (@_min = false) and not (@_max = false) {
-					@media only screen and (max-width: @_max) {
-						._colPadding();
-					}
-				}
-
-				& when not (@_min = false) and (@_max = false) {
-					@media only screen and (min-width: @_min) {
-						._colPadding();
-					}
-				}
-
-				& when (@_min = false) and (@_max = false) {
-					._colPadding();
-				}
-
-				& when not (@_min = false) and not (@_max = false) {
-					@media only screen and (min-width: @_min) and (max-width: @_max) {
-						._colPadding();
-					}
-				}
-			}
-
-			.makeColPaddingForPrefix1Loop(@i + 1);
 		}
 	}
 
 	.makeColPositionAll() {
 		.makeColPositionAllLoop();
 
-		.makeColPositionAllLoop(@i: 1) when (@i < length(@positions)) {
+		.makeColPositionAllLoop(@i: 0) when (@i < length(@positions)) {
 
-			@positionName: extract(@positions, @i);
+			@positionName: extract(@positions, @i+1);
 
 			.@{colClassName}@{sep}all@{sep}@{positionName} {
 				#legrid.getStyleForPosition(@positionName);
@@ -256,9 +219,9 @@
 
 		.makeColPositionForPrefixLoop();
 
-		.makeColPositionForPrefixLoop(@i: 1) when (@i < length(@positions)) {
+		.makeColPositionForPrefixLoop(@i: 0) when (@i < length(@positions)) {
 
-			@positionName: extract(@positions, @i);
+			@positionName: extract(@positions, @i+1);
 
 			.@{colClassName}@{sep}@{prefix}@{sep}@{positionName} {
 
@@ -266,27 +229,22 @@
 					#legrid.getStyleForPosition(@positionName);
 				}
 
-				@_min: extract(@colBreakMin, @prefixNum);
-				@_max: extract(@colBreakMax, @prefixNum);
-
-				& when (@_min = false) and not (@_max = false) {
-					@media only screen and (max-width: @_max) {
-						._colPositions;
-					}
-				}
-
-				& when not (@_min = false) and (@_max = false) {
-					@media only screen and (min-width: @_min) {
-						._colPositions;
-					}
-				}
-
-				& when (@_min = false) and (@_max = false) {
+				// For first prefix we need code without @media wrapper
+				& when (@prefixNum = 1) {
 					._colPositions;
 				}
+				& when (@prefixNum > 1) {
 
-				& when not (@_min = false) and not (@_max = false) {
-					@media only screen and (min-width: @_min) and (max-width: @_max) {
+					@_min: extract(@colBreakMin, @prefixNum);
+					@_max: extract(@colBreakMax, @prefixNum);
+
+					& when not (@_min = false) {
+						@media only screen and (min-width: @_min) {
+							._colPositions;
+						}
+					}
+
+					& when (@_min = false) and (@_max = false) {
 						._colPositions;
 					}
 				}
@@ -329,24 +287,19 @@
 			& when (@addColAutoForPrefixes = true) {
 				.@{colClassName}@{sep}@{prefix}@{sep}auto {
 
-					& when (@_min = false) and not (@_max = false) {
-						@media only screen and (max-width: @_max) {
-							.col-auto;
-						}
-					}
-
-					& when not (@_min = false) and (@_max = false) {
-						@media only screen and (min-width: @_min) {
-							.col-auto;
-						}
-					}
-
-					& when (@_min = false) and (@_max = false) {
+					// For first prefix we need code without @media wrapper
+					& when (@prefixNum = 1) {
 						.col-auto;
 					}
+					& when (@prefixNum > 1) {
 
-					& when not (@_min = false) and not (@_max = false) {
-						@media only screen and (min-width: @_min) and (max-width: @_max) {
+						& when not (@_min = false) {
+							@media only screen and (min-width: @_min) {
+								.col-auto;
+							}
+						}
+
+						& when (@_min = false) and (@_max = false) {
 							.col-auto;
 						}
 					}
@@ -355,24 +308,19 @@
 
 			& when (@addColReverseForPrefixes = true) {
 				.@{colClassName}@{sep}@{prefix}@{sep}reverse {
-					& when (@_min = false) and not (@_max = false) {
-						@media only screen and (max-width: @_max) {
-							#legrid.col-reverse;
-						}
-					}
-
-					& when not (@_min = false) and (@_max = false) {
-						@media only screen and (min-width: @_min) {
-							#legrid.col-reverse;
-						}
-					}
-
-					& when (@_min = false) and (@_max = false) {
+					// For first prefix we need code without @media wrapper
+					& when (@prefixNum = 1) {
 						#legrid.col-reverse;
 					}
+					& when (@prefixNum > 1) {
 
-					& when not (@_min = false) and not (@_max = false) {
-						@media only screen and (min-width: @_min) and (max-width: @_max) {
+						& when not (@_min = false) {
+							@media only screen and (min-width: @_min) {
+								#legrid.col-reverse;
+							}
+						}
+
+						& when (@_min = false) and (@_max = false) {
 							#legrid.col-reverse;
 						}
 					}

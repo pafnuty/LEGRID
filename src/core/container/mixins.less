@@ -45,13 +45,7 @@
 				}
 				& when (@prefixNum > 1) {
 
-					& when (@_min = false) and not (@_max = false) {
-						@media only screen and (max-width: @_max) {
-							._gutter;
-						}
-					}
-
-					& when not (@_min = false) and (@_max = false) {
+					& when not (@_min = false) {
 						@media only screen and (min-width: @_min) {
 							._gutter;
 						}
@@ -59,12 +53,6 @@
 
 					& when (@_min = false) and (@_max = false) {
 						._gutter;
-					}
-
-					& when not (@_min = false) and not (@_max = false) {
-						@media only screen and (min-width: @_min) and (max-width: @_max) {
-							._gutter;
-						}
 					}
 				}
 

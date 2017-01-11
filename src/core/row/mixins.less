@@ -22,7 +22,7 @@
 		.makeRowLoop();
 
 		// Col loop
-		.makeRowLoop (@colPrefixes: @colPrefixes, @i: 1) when (@i <= length(@colPrefixes)) {
+		.makeRowLoop (@i: 1) when (@i <= length(@colPrefixes)) {
 			@prefixNum: @i;
 			@maxWidth: extract(@colMaxWidth, @i);
 			@rowGutter: extract(@colPaddings, @i);
@@ -44,13 +44,7 @@
 				}
 				& when (@prefixNum > 1) {
 
-					& when (@_min = false) and not (@_max = false) {
-						@media only screen and (max-width: @_max) {
-							._rowStyle;
-						}
-					}
-
-					& when not (@_min = false) and (@_max = false) {
+					& when not (@_min = false) {
 						@media only screen and (min-width: @_min) {
 							._rowStyle;
 						}
@@ -59,16 +53,10 @@
 					& when (@_min = false) and (@_max = false) {
 						._rowStyle;
 					}
-
-					& when not (@_min = false) and not (@_max = false) {
-						@media only screen and (min-width: @_min) and (max-width: @_max) {
-							._rowStyle;
-						}
-					}
 				}
 			}
 
-			.makeRowLoop (@colPrefixes, @i + 1);
+			.makeRowLoop (@i + 1);
 		}
 	}
 }

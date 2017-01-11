@@ -1,7 +1,7 @@
 /*!
  * LEGRID — Simple, effective and easy grid on flexBox and less.
  * Version: 3.0.0
- * Date: 11.01.2017
+ * Date: 12.01.2017
  * Author: Pavel Belousov
  * HomePage: https://git.io/va1ms
  * License: MIT
@@ -73,12 +73,28 @@
       flex: 0 0 auto;
 }
 #legrid.col-reverse,
-.col-reverse {
+.col-reverse,
+.col-xs-reverse,
+.col-sm-reverse,
+.col-md-reverse,
+.col-lg-reverse {
   -ms-flex-direction: row-reverse;
       flex-direction: row-reverse;
 
   -ms-flex-wrap: wrap-reverse;
       flex-wrap: wrap-reverse;
+}
+#legrid.col-auto,
+.col-xs-auto,
+.col-sm-auto,
+.col-md-auto,
+.col-lg-auto {
+  max-width: 100%;
+
+  -ms-flex-positive: 1;
+      flex-grow: 1;
+  -ms-flex-preferred-size: 0;
+      flex-basis: 0;
 }
 .container-fluid .container .row {
   width: auto;
@@ -159,6 +175,11 @@
   -ms-flex-order: -1;
 
       order: -1;
+}
+.col-all-last {
+  -ms-flex-order: 1;
+
+      order: 1;
 }
 .col-xs-min-1 {
   min-width: 8.33333333%;
@@ -268,11 +289,63 @@
   -ms-flex-preferred-size: 100%;
       flex-basis: 100%;
 }
-.col-xs-1,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-10,.col-xs-11,.col-xs-12 {
+.col-xs-auto,.col-xs-1,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-10,.col-xs-11 {
   padding-right: 10px;
   padding-left: 10px;
 }
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+.col-xs-start {
+  -ms-flex-pack: start;
+
+      justify-content: flex-start;
+}
+.col-xs-center {
+  -ms-flex-pack: center;
+
+  text-align: center;
+
+      justify-content: center;
+}
+.col-xs-end {
+  -ms-flex-pack: end;
+
+      justify-content: flex-end;
+}
+.col-xs-top {
+  -ms-flex-align: start;
+
+      align-items: flex-start;
+}
+.col-xs-middle {
+  -ms-flex-align: center;
+
+      align-items: center;
+}
+.col-xs-bottom {
+  -ms-flex-align: end;
+
+      align-items: flex-end;
+}
+.col-xs-around {
+  -ms-flex-pack: distribute;
+
+      justify-content: space-around;
+}
+.col-xs-between {
+  -ms-flex-pack: justify;
+
+      justify-content: space-between;
+}
+.col-xs-first {
+  -ms-flex-order: -1;
+
+      order: -1;
+}
+.col-xs-last {
+  -ms-flex-order: 1;
+
+      order: 1;
+}
+@media only screen and (min-width: 768px) {
   .container {
     padding-right: 10px;
     padding-left: 10px;
@@ -283,21 +356,6 @@
   .row .row {
     margin-right: -10px;
     margin-left: -10px;
-  }
-  .col-sm-auto {
-    max-width: 100%;
-
-    -ms-flex-positive: 1;
-        flex-grow: 1;
-    -ms-flex-preferred-size: 0;
-        flex-basis: 0;
-  }
-  .col-sm-reverse {
-    -ms-flex-direction: row-reverse;
-        flex-direction: row-reverse;
-
-    -ms-flex-wrap: wrap-reverse;
-        flex-wrap: wrap-reverse;
   }
   .col-sm-min-1 {
     min-width: 8.33333333%;
@@ -407,7 +465,7 @@
     -ms-flex-preferred-size: 100%;
         flex-basis: 100%;
   }
-  .col-sm-1,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-10,.col-sm-11,.col-sm-12 {
+  .col-sm-auto,.col-sm-1,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-10,.col-sm-11 {
     padding-right: 20px;
     padding-left: 20px;
   }
@@ -458,8 +516,13 @@
 
         order: -1;
   }
+  .col-sm-last {
+    -ms-flex-order: 1;
+
+        order: 1;
+  }
 }
-@media only screen and (min-width: 992px) and (max-width: 1279px) {
+@media only screen and (min-width: 992px) {
   .container {
     padding-right: 10px;
     padding-left: 10px;
@@ -470,21 +533,6 @@
   .row .row {
     margin-right: -10px;
     margin-left: -10px;
-  }
-  .col-md-auto {
-    max-width: 100%;
-
-    -ms-flex-positive: 1;
-        flex-grow: 1;
-    -ms-flex-preferred-size: 0;
-        flex-basis: 0;
-  }
-  .col-md-reverse {
-    -ms-flex-direction: row-reverse;
-        flex-direction: row-reverse;
-
-    -ms-flex-wrap: wrap-reverse;
-        flex-wrap: wrap-reverse;
   }
   .col-md-min-1 {
     min-width: 8.33333333%;
@@ -594,7 +642,7 @@
     -ms-flex-preferred-size: 100%;
         flex-basis: 100%;
   }
-  .col-md-1,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-10,.col-md-11,.col-md-12 {
+  .col-md-auto,.col-md-1,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-10,.col-md-11 {
     padding-right: 20px;
     padding-left: 20px;
   }
@@ -645,6 +693,11 @@
 
         order: -1;
   }
+  .col-md-last {
+    -ms-flex-order: 1;
+
+        order: 1;
+  }
 }
 @media only screen and (min-width: 1280px) {
   .container {
@@ -657,21 +710,6 @@
   .row .row {
     margin-right: -15px;
     margin-left: -15px;
-  }
-  .col-lg-auto {
-    max-width: 100%;
-
-    -ms-flex-positive: 1;
-        flex-grow: 1;
-    -ms-flex-preferred-size: 0;
-        flex-basis: 0;
-  }
-  .col-lg-reverse {
-    -ms-flex-direction: row-reverse;
-        flex-direction: row-reverse;
-
-    -ms-flex-wrap: wrap-reverse;
-        flex-wrap: wrap-reverse;
   }
   .col-lg-min-1 {
     min-width: 8.33333333%;
@@ -781,7 +819,7 @@
     -ms-flex-preferred-size: 100%;
         flex-basis: 100%;
   }
-  .col-lg-1,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-10,.col-lg-11,.col-lg-12 {
+  .col-lg-auto,.col-lg-1,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-10,.col-lg-11 {
     padding-right: 30px;
     padding-left: 30px;
   }
@@ -832,68 +870,9 @@
 
         order: -1;
   }
-}
-@media only screen and (max-width: 767px) {
-  .col-xs-auto {
-    max-width: 100%;
+  .col-lg-last {
+    -ms-flex-order: 1;
 
-    -ms-flex-positive: 1;
-        flex-grow: 1;
-    -ms-flex-preferred-size: 0;
-        flex-basis: 0;
-  }
-  .col-xs-reverse {
-    -ms-flex-direction: row-reverse;
-        flex-direction: row-reverse;
-
-    -ms-flex-wrap: wrap-reverse;
-        flex-wrap: wrap-reverse;
-  }
-  .col-xs-start {
-    -ms-flex-pack: start;
-
-        justify-content: flex-start;
-  }
-  .col-xs-center {
-    -ms-flex-pack: center;
-
-    text-align: center;
-
-        justify-content: center;
-  }
-  .col-xs-end {
-    -ms-flex-pack: end;
-
-        justify-content: flex-end;
-  }
-  .col-xs-top {
-    -ms-flex-align: start;
-
-        align-items: flex-start;
-  }
-  .col-xs-middle {
-    -ms-flex-align: center;
-
-        align-items: center;
-  }
-  .col-xs-bottom {
-    -ms-flex-align: end;
-
-        align-items: flex-end;
-  }
-  .col-xs-around {
-    -ms-flex-pack: distribute;
-
-        justify-content: space-around;
-  }
-  .col-xs-between {
-    -ms-flex-pack: justify;
-
-        justify-content: space-between;
-  }
-  .col-xs-first {
-    -ms-flex-order: -1;
-
-        order: -1;
+        order: 1;
   }
 }

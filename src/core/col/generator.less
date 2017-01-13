@@ -1,0 +1,20 @@
+
+#legrid {
+	.makeColumns() {
+		#legrid.makeColAdditional();
+		#legrid.makeColPositionAll();
+		#legrid.makeColPaddings();
+
+		.makeColumnsLoop();
+
+		.makeColumnsLoop(@i: 1) when (@i <= length(@colPrefixes)) {
+
+			#legrid.makeColCommon(@i);
+			#legrid.makeColForPrefix(@i);
+			#legrid.makeColPositionForPrefix(@i);
+
+			.makeColumnsLoop (@i + 1);
+		}
+
+	}
+}

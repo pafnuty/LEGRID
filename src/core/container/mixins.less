@@ -1,0 +1,66 @@
+#legrid {
+	&.w100p {
+		width: 100%;
+	}
+	.containerGutter(@gutter) {
+		padding-left: @gutter / 2;
+		padding-right: @gutter / 2;
+	}
+
+	.makeContainerMixin() {
+		.@{containerClassName} {
+			.@{containerClassName} {
+				&:extend(#legrid.w100p);
+			}
+		}
+
+		.@{containerClassName}@{sep}fluid {
+			padding: 0;
+			.@{rowClassName} {
+				max-width: 100%;
+			}
+			.@{containerClassName} {
+				.@{rowClassName} {
+					width: inherit;
+					max-width: inherit;
+				}
+			}
+		}
+
+		.makeContainerLoop();
+
+		// Container loop
+		.makeContainerLoop (@colPrefixes: @colPrefixes, @i: 1) when (@i <= length(@colPrefixes)) {
+			@prefixNum: @i;
+			@containerGutter: extract(@colPaddings, @i);
+
+			.@{containerClassName} {
+				@_min: extract(@colBreakMin, @i);
+				@_max: extract(@colBreakMax, @i);
+
+				._gutter() {
+					#legrid.containerGutter(@containerGutter);
+				}
+
+				& when (@prefixNum = 1) {
+					._gutter;
+				}
+				& when (@prefixNum > 1) {
+
+					& when not (@_min = false) {
+						@media only screen and (min-width: @_min) {
+							._gutter;
+						}
+					}
+
+					& when (@_min = false) and (@_max = false) {
+						._gutter;
+					}
+				}
+
+			}
+
+			.makeContainerLoop (@colPrefixes, @i + 1);
+		}
+	}
+}

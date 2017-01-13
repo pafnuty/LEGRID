@@ -1,0 +1,61 @@
+#legrid {
+
+	.rowGutter(@gutter) {
+		margin-left: -@gutter / 2;
+		margin-right: -@gutter / 2;
+	}
+
+	.makeRowMixin() {
+		.@{rowClassName} {
+			margin: 0 auto;
+			box-sizing: border-box;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+
+			&@{sep}reverse {
+				flex-direction: row-reverse;
+				flex-wrap: wrap-reverse;
+			}
+		}
+
+		.makeRowLoop();
+
+		.makeRowLoop (@i: 1) when (@i <= length(@colPrefixes)) {
+			@prefixNum: @i;
+			@maxWidth: extract(@colMaxWidth, @i);
+			@rowGutter: extract(@colPaddings, @i);
+
+			.@{rowClassName} {
+				@_min: extract(@colBreakMin, @i);
+				@_max: extract(@colBreakMax, @i);
+
+				._rowStyle() {
+					max-width: @maxWidth;
+
+					& & {
+						#legrid.rowGutter(@rowGutter);
+					}
+				}
+
+				& when (@prefixNum = 1) {
+					._rowStyle;
+				}
+				& when (@prefixNum > 1) {
+
+					& when not (@_min = false) {
+						@media only screen and (min-width: @_min) {
+							._rowStyle;
+						}
+					}
+
+					& when (@_min = false) and (@_max = false) {
+						._rowStyle;
+					}
+				}
+			}
+
+			.makeRowLoop (@i + 1);
+		}
+	}
+}

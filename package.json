@@ -1,20 +1,43 @@
 {
-	"name": "legrid",
-	"description": "Simple, effective and easy grid on FlexBox and less.",
-	"version": "2.0.3",
-	"keywords": [
-		"less, css"
-	],
-	"repositories": [
-		{
-			"type": "git",
-			"url": "git@github.com:pafnuty/LEGRID.git"
-		}
-	],
-	"licenses": [
-		{
-			"name": "MIT",
-			"url": "https://raw.githubusercontent.com/pafnuty/LEGRID/master/LICENSE"
-		}
-	]
+  "name": "legrid",
+  "description": "Simple, fully configurable, comfortable grid on less and flexBox",
+  "homepage": "https://git.io/va1ms",
+  "title": "LEGRID",
+  "version": "3.0.0",
+  "keywords": [
+    "less, css, flexbox, grid"
+  ],
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@github.com:pafnuty/LEGRID.git"
+    }
+  ],
+  "author": {
+    "name": "Pavel Belousov",
+    "email": "pafnuty@pafnuty.name",
+    "url": "https://github.com/pafnuty"
+  },
+  "licenses": [
+    {
+      "name": "MIT",
+      "url": "https://raw.githubusercontent.com/pafnuty/LEGRID/master/LICENSE"
+    }
+  ],
+  "devDependencies": {
+    "autoprefixer": "^6.6.1",
+    "cssnano": "^3.10.0",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-less": "^1.4.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-css-mqpacker": "^3.0.1",
+    "grunt-postcss": "^0.8.0",
+    "load-grunt-tasks": "^3.5.2",
+    "postcss-banner": "^3.0.0",
+    "postcss-flexbugs-fixes": "^2.1.0",
+    "postcss-merge-rules": "^2.1.1",
+    "postcss-sorting": "^1.7.0"
+  }
 }

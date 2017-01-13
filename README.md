@@ -4,3 +4,18 @@
 
 LEGRID — Simple, fully configurable, comfortable grid on less and flexBox.
 
+#### For build:
+
+```
+npm i
+```
+
+```
+grunt
+```
+or
+```
+grunt watch:less
+```
+
+

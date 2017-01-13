@@ -15,12 +15,14 @@
 		}
 
 		.@{containerClassName}@{sep}fluid {
+			padding: 0;
 			.@{rowClassName} {
-				&:extend(#legrid.w100p);
+				max-width: 100%;
 			}
 			.@{containerClassName} {
 				.@{rowClassName} {
-					width: auto;
+					width: inherit;
+					max-width: inherit;
 				}
 			}
 		}

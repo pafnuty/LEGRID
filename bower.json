@@ -1,7 +1,7 @@
 {
   "name": "legrid",
   "version": "3.0.0",
-  "description": "Simple, effective and easy grid on flexBox and less.",
+  "description": "Simple, fully configurable, comfortable grid on less and flexBox",
   "main": "src/less/legrid.less",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,6 +13,7 @@
   "keywords": [
     "browser",
     "flexbox",
+    "less",
     "grid",
     "css"
   ],

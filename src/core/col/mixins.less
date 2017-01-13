@@ -74,6 +74,72 @@
 		}
 	}
 
+	.makeColPaddings() {
+		.mediaQueriesLoop;
+
+		.mediaQueriesLoop(@iMedia: 1) when (@iMedia <= length(@colPrefixes)) {
+			.makeMediaWrapper;
+
+			.makeMediaWrapper() {
+				._makePrefixes() {
+					.prefixesLoop(@iMedia);
+				}
+
+				& when (@iMedia = 1) {
+					._makePrefixes;
+				}
+
+				& when (@iMedia > 1) {
+
+					@_min: extract(@colBreakMin, @iMedia);
+					@_max: extract(@colBreakMax, @iMedia);
+
+					& when not (@_min = false) {
+						@media only screen and (min-width: @_min) {
+							._makePrefixes;
+						}
+					}
+
+					& when (@_min = false) and (@_max = false) {
+						._makePrefixes;
+					}
+				}
+			}
+
+			.mediaQueriesLoop (@iMedia + 1);
+		}
+
+		.prefixesLoop(@iMedia, @iPrefix: 1) when (@iPrefix <= length(@colPrefixes)) {
+			.columnsLoop(@iMedia, @iPrefix);
+			.prefixesLoop (@iMedia, @iPrefix + 1);
+		}
+
+		.columnsLoop(@iMedia, @iPrefix, @iCol: 0) when (@iCol < (@columns + 1)) {
+			@iPrefixName: extract(@colPrefixes, @iPrefix);
+			.makeClassName;
+
+			.makeClassName() {
+
+				& when (@iCol = 1) {
+					._makePaddingClass(auto);
+				}
+				& when (@iCol > 1) {
+					._makePaddingClass(@iCol);
+				}
+
+				._makePaddingClass(@suffix) {
+					@padding: extract(@colPaddings, @iMedia) / 2;
+					.@{colClassName}@{sep}@{iPrefixName}@{sep}@{suffix} {
+						padding-left: @padding;
+						padding-right: @padding;
+					}
+				}
+			}
+
+			.columnsLoop (@iMedia, @iPrefix, @iCol + 1);
+		}
+	}
+
 	.makeColForPrefix(@prefixNum) {
 		@prefix: extract(@colPrefixes, @prefixNum);
 		.makeColForPrefixLoop();
@@ -84,14 +150,19 @@
 			._colClass() {
 
 				._colClasses() {
-					.@{colClassName}@{sep}@{prefix}@{sep}min@{sep}@{colNum} {
-						min-width: @width;
-					}
 
 					.@{colClassName}@{sep}@{prefix}@{sep}@{colNum} {
 						flex-basis: @width;
 						max-width: @width;
 						&:extend(#legrid.colCommonStyles);
+					}
+
+					.@{colClassName}@{sep}@{prefix}@{sep}min@{sep}@{colNum} {
+						min-width: @width;
+					}
+
+					.@{colClassName}@{sep}@{prefix}@{sep}offset@{sep}@{colNum} {
+						margin-left: @width;
 					}
 				}
 
@@ -140,62 +211,6 @@
 			._colClass;
 
 			.makeColForPrefixLoop(@i + 1);
-		}
-	}
-
-	.makeColPaddingForPrefix(@prefixNum) {
-		@prefix: extract(@colPrefixes, @prefixNum);
-
-		.makeColPaddingForPrefixLoop();
-		.makeColPaddingForPrefixLoop(@i: 0) when (@i < (@columns + 1)) {
-			@colNum: @i;
-			@padding: extract(@colPaddings, @prefixNum);
-
-			._colPadding() {
-				padding-right: @padding;
-				padding-left: @padding;
-			}
-
-			._makePaddingClass() {
-
-				._makePaddingClassTo(@className) {
-
-					.@{className} {
-						@_min: extract(@colBreakMin, @prefixNum);
-						@_max: extract(@colBreakMax, @prefixNum);
-
-						& when (@prefixNum = 1) {
-							._colPadding();
-						}
-						& when (@prefixNum > 1) {
-
-							& when not (@_min = false) {
-								@media only screen and (min-width: @_min) {
-									._colPadding;
-								}
-							}
-
-							& when (@_min = false) and (@_max = false) {
-								._colPadding;
-							}
-
-						}
-					}
-				}
-
-				& when (@colNum = 0) {
-					@colClassNameCalculated: e(%('%s%s%s%s%s', @colClassName, @sep, @prefix, @sep, auto));
-					._makePaddingClassTo(@colClassNameCalculated);
-				}
-				& when (@colNum > 0) {
-					@colClassNameCalculated: e(%('%s%s%s%s%s', @colClassName, @sep, @prefix, @sep, @colNum));
-					._makePaddingClassTo(@colClassNameCalculated);
-				}
-			}
-
-			._makePaddingClass;
-
-			.makeColPaddingForPrefixLoop(@i + 1);
 		}
 	}
 
@@ -330,4 +345,5 @@
 			.makeColAdditionalLoop (@i + 1);
 		}
 	}
+
 }

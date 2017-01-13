@@ -1,10 +1,177 @@
+// Visible class suffix list (for make loop)
+@helperVisibleClasses: 'visible%s%s%sblock', 'visible%s%s%sinline', 'visible%s%s%sinline%sblock';
+
+// Hidden class suffix list (for make loop)
+@helperHiddenClasses: 'hidden%s%s';
+
 #legrid {
-	.makeHelpersMixin() {
-		.makeHelpersMixinLoop();
-
-		.makeHelpersMixinLoop(@i: 1) when (@i <= length(@colPrefixes)) {
-
-			.makeHelpersMixinLoop (@i + 1);
+	&.helper-hide {
+		display: none;
+	}
+	.getStyleForDisplayHelper(@classString) {
+		& when (@classString = 'visible%s%s%sblock') {
+			display: block;
 		}
+		& when (@classString = 'visible%s%s%sinline') {
+			display: inline;
+		}
+		& when (@classString = 'visible%s%s%sinline%sblock') {
+			display: inline-block;
+		}
+		& when (@classString = 'hidden%s%s') {
+			display: none;
+		}
+	}
+
+	.helperClass(@classString, @className, @prefixNum, @addToCommon: false) {
+
+		.@{className} {
+			& when (@addToCommon = true) {
+				&:extend(#legrid.helper-hide);
+			}
+
+			._helperStyle() {
+				#legrid.getStyleForDisplayHelper(@classString);
+			}
+
+			@_min: extract(@colBreakMin, @prefixNum);
+			@_max: extract(@colBreakMax, @prefixNum);
+
+			& when (@_min = false) and not (@_max = false) {
+				@media only screen and (max-width: @_max) {
+					._helperStyle;
+				}
+			}
+
+			& when not (@_min = false) and (@_max = false) {
+				@media only screen and (min-width: @_min) {
+					._helperStyle;
+				}
+			}
+
+			& when (@_min = false) and (@_max = false) {
+				._helperStyle;
+			}
+
+			& when not (@_min = false) and not (@_max = false) {
+				@media only screen and (min-width: @_min) and (max-width: @_max) {
+					._helperStyle;
+				}
+			}
+
+		}
+	}
+
+	.getStyleForIndent(@classString, @gutter) {
+		& when (@classString = padding) {
+			padding-top: @gutter;
+			padding-bottom: @gutter;
+
+			&@{sep}top {
+				padding-top: @gutter;
+			}
+			&@{sep}right {
+				padding-right: @gutter;
+			}
+			&@{sep}bottom {
+				padding-bottom: @gutter;
+			}
+			&@{sep}left {
+				padding-left: @gutter;
+			}
+		}
+		& when (@classString = margin) {
+			margin-top: @gutter;
+			margin-bottom: @gutter;
+
+			// margin top zero because in flexbox model vertical margins summarized
+			& + & {
+				margin-top: 0;
+			}
+
+			&@{sep}top {
+				margin-top: @gutter;
+			}
+			&@{sep}right {
+				margin-right: @gutter;
+			}
+			&@{sep}bottom {
+				margin-bottom: @gutter;
+			}
+			&@{sep}left {
+				margin-left: @gutter;
+			}
+		}
+	}
+
+	.makeHelpersMixin() {
+
+		.makeDisplayHelpersLoop();
+
+		.makeDisplayHelpersLoop (@i: 1) when (@i <= length(@colPrefixes)) {
+			@prefixNum: @i;
+			@prefix: extract(@colPrefixes, @prefixNum);
+			@gutter: extract(@colPaddings, @i);
+
+			.makeVisibleClasses;
+			.makeHiddenClasses;
+			.makeMarginsAndPaddingsCols;
+
+			.makeVisibleClasses(@ii: 0) when (@ii < length(@helperVisibleClasses)) {
+				@classString: extract(@helperVisibleClasses, @ii + 1);
+				@className: e(%(@classString, @sep, @prefix, @sep, @sep));
+
+				#legrid.helperClass(@classString, @className, @prefixNum, true);
+
+				.makeVisibleClasses(@ii + 1);
+			}
+
+			.makeHiddenClasses(@iii: 0) when (@iii < length(@helperHiddenClasses)) {
+				@classString: extract(@helperHiddenClasses, @iii + 1);
+				@className: e(%(@classString, @sep, @prefix));
+
+				#legrid.helperClass(@classString, @className, @prefixNum);
+
+				.makeHiddenClasses(@iii + 1);
+			}
+
+			.makeDisplayHelpersLoop (@i + 1);
+
+			.makeMarginsAndPaddingsCols() {
+				.makeIndentClassName(margin);
+				.makeIndentClassName(padding);
+
+				.makeIndentClassName(@indentType) {
+					.@{colClassName}@{sep}@{indentType} {
+
+						@_min: extract(@colBreakMin, @prefixNum);
+						@_max: extract(@colBreakMax, @prefixNum);
+
+						.colIndentStyle() {
+							#legrid.getStyleForIndent(@indentType, @gutter);
+						}
+
+						// For first prefix we need code without @media wrapper
+						& when (@prefixNum = 1) {
+							.colIndentStyle;
+						}
+						& when (@prefixNum > 1) {
+
+							& when not (@_min = false) {
+								@media only screen and (min-width: @_min) {
+									.colIndentStyle;
+								}
+							}
+
+							& when (@_min = false) and (@_max = false) {
+								.colIndentStyle;
+							}
+						}
+					}
+				}
+
+			}
+		}
+
 	}
 }

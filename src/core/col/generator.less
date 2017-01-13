@@ -3,6 +3,7 @@
 	.makeColumns() {
 		#legrid.makeColAdditional();
 		#legrid.makeColPositionAll();
+		#legrid.makeColPaddings();
 
 		.makeColumnsLoop();
 
@@ -10,7 +11,6 @@
 
 			#legrid.makeColCommon(@i);
 			#legrid.makeColForPrefix(@i);
-			#legrid.makeColPaddingForPrefix(@i);
 			#legrid.makeColPositionForPrefix(@i);
 
 			.makeColumnsLoop (@i + 1);

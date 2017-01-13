@@ -45,7 +45,6 @@ module.exports = function(grunt) {
 						require('postcss-sorting')({
 							'sort-order': 'csscomb'
 						}),
-						require('postcss-move-media'),
 						require('postcss-merge-rules')(),
 						require('postcss-flexbugs-fixes'),
 						require('postcss-banner')({

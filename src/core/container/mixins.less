@@ -20,8 +20,9 @@
 				max-width: 100%;
 			}
 			.@{containerClassName} {
+				width: auto;
 				.@{rowClassName} {
-					width: inherit;
+					width: auto;
 					max-width: inherit;
 				}
 			}
@@ -44,7 +45,6 @@
 					&@{sep}fluid {
 						.@{rowClassName} {
 							max-width: ~"calc(100% + @{containerGutter})";
-
 						}
 					}
 				}

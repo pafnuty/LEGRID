@@ -40,6 +40,13 @@
 
 				._gutter() {
 					#legrid.containerGutter(@containerGutter);
+
+					&@{sep}fluid {
+						.@{rowClassName} {
+							max-width: ~"calc(100% + @{containerGutter})";
+
+						}
+					}
 				}
 
 				& when (@prefixNum = 1) {

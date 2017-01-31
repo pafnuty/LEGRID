@@ -84,9 +84,9 @@
 			margin-top: @gutter;
 			margin-bottom: @gutter;
 
-			// margin top zero because in flexbox model vertical margins summarized
-			& + & {
-				margin-top: 0;
+			&@{sep}half {
+				margin-top: @gutter / 2;
+				margin-bottom: @gutter / 2;
 			}
 
 			&@{sep}top {

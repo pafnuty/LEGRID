@@ -1,6 +1,6 @@
 {
   "name": "legrid",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Simple, fully configurable, comfortable grid on less and flexBox",
   "main": "src/less/legrid.less",
   "scripts": {

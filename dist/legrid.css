@@ -1,7 +1,7 @@
 /*!
  * LEGRID — Simple, fully configurable, comfortable grid on less and flexBox
- * Version: 3.0.0
- * Date: 16.01.2017
+ * Version: 3.0.2
+ * Date: 31.01.2017
  * Author: Pavel Belousov
  * HomePage: https://git.io/va1ms
  * License: MIT
@@ -118,6 +118,9 @@
 .container {
   padding-right: 5px;
   padding-left: 5px;
+}
+.container-fluid .row {
+  max-width: calc(100% + 10px);
 }
 .row {
   display: -ms-flexbox;
@@ -401,8 +404,9 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.col-margin + .col-margin {
-  margin-top: 0;
+.col-margin-half {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .col-margin-top {
   margin-top: 10px;
@@ -435,6 +439,9 @@
   .container {
     padding-right: 10px;
     padding-left: 10px;
+  }
+  .container-fluid .row {
+    max-width: calc(100% + 20px);
   }
   .row {
     max-width: 750px;
@@ -662,8 +669,9 @@
     margin-top: 20px;
     margin-bottom: 20px;
   }
-  .col-margin + .col-margin {
-    margin-top: 0;
+  .col-margin-half {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
   .col-margin-top {
     margin-top: 20px;
@@ -697,6 +705,9 @@
   .container {
     padding-right: 15px;
     padding-left: 15px;
+  }
+  .container-fluid .row {
+    max-width: calc(100% + 30px);
   }
   .row {
     max-width: 970px;
@@ -924,8 +935,9 @@
     margin-top: 30px;
     margin-bottom: 30px;
   }
-  .col-margin + .col-margin {
-    margin-top: 0;
+  .col-margin-half {
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
   .col-margin-top {
     margin-top: 30px;
@@ -959,6 +971,9 @@
   .container {
     padding-right: 20px;
     padding-left: 20px;
+  }
+  .container-fluid .row {
+    max-width: calc(100% + 40px);
   }
   .row {
     max-width: 1170px;
@@ -1198,8 +1213,9 @@
     margin-top: 40px;
     margin-bottom: 40px;
   }
-  .col-margin + .col-margin {
-    margin-top: 0;
+  .col-margin-half {
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
   .col-margin-top {
     margin-top: 40px;

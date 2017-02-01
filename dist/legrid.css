@@ -1,7 +1,7 @@
 /*!
  * LEGRID — Simple, fully configurable, comfortable grid on less and flexBox
- * Version: 3.0.3
- * Date: 31.01.2017
+ * Version: 3.0.4
+ * Date: 01.02.2017
  * Author: Pavel Belousov
  * HomePage: https://git.io/va1ms
  * License: MIT
@@ -1201,16 +1201,16 @@
         order: 1;
   }
   .visible-lg-block {
-    display: block;
+    display: block !important;
   }
   .visible-lg-inline {
-    display: inline;
+    display: inline !important;
   }
   .visible-lg-inline-block {
-    display: inline-block;
+    display: inline-block !important;
   }
   .hidden-lg {
-    display: none;
+    display: none !important;
   }
   .col-margin {
     margin-top: 40px;
@@ -1250,43 +1250,43 @@
 }
 @media only screen and (max-width: 767px) {
   .visible-xs-block {
-    display: block;
+    display: block !important;
   }
   .visible-xs-inline {
-    display: inline;
+    display: inline !important;
   }
   .visible-xs-inline-block {
-    display: inline-block;
+    display: inline-block !important;
   }
   .hidden-xs {
-    display: none;
+    display: none !important;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .visible-sm-block {
-    display: block;
+    display: block !important;
   }
   .visible-sm-inline {
-    display: inline;
+    display: inline !important;
   }
   .visible-sm-inline-block {
-    display: inline-block;
+    display: inline-block !important;
   }
   .hidden-sm {
-    display: none;
+    display: none !important;
   }
 }
 @media only screen and (min-width: 992px) and (max-width: 1279px) {
   .visible-md-block {
-    display: block;
+    display: block !important;
   }
   .visible-md-inline {
-    display: inline;
+    display: inline !important;
   }
   .visible-md-inline-block {
-    display: inline-block;
+    display: inline-block !important;
   }
   .hidden-md {
-    display: none;
+    display: none !important;
   }
 }

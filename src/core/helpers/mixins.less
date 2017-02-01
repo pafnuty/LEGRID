@@ -10,16 +10,16 @@
 	}
 	.getStyleForDisplayHelper(@classString) {
 		& when (@classString = 'visible%s%s%sblock') {
-			display: block;
+			display: block !important;
 		}
 		& when (@classString = 'visible%s%s%sinline') {
-			display: inline;
+			display: inline !important;
 		}
 		& when (@classString = 'visible%s%s%sinline%sblock') {
-			display: inline-block;
+			display: inline-block !important;
 		}
 		& when (@classString = 'hidden%s%s') {
-			display: none;
+			display: none !important;
 		}
 	}
 

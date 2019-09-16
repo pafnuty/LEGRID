@@ -1,14 +1,12 @@
-'use strict';
+module.exports = (grunt) => {
 
-module.exports = function(grunt) {
-
-	var pkg = grunt.file.readJSON('package.json');
-	var banner = pkg.title + ' — ' + pkg.description + '\n'
-		+ 'Version: ' + pkg.version + '\n'
-		+ 'Date: ' + grunt.template.today('dd.mm.yyyy') + '\n'
-		+ 'Author: ' + pkg.author.name + '\n'
-		+ 'HomePage: ' + pkg.homepage + '\n'
-		+ 'License: ' + pkg.licenses[0]['name'];
+	const pkg = grunt.file.readJSON('package.json')
+	const banner = `${pkg.title} — ${pkg.description}
+Version: ${pkg.version}
+Date: ${grunt.template.today('dd.mm.yyyy')}
+Author: ${pkg.author.name}
+HomePage: ${pkg.homepage}
+License: ${pkg.license}`
 
 	grunt.initConfig({
 
@@ -39,9 +37,7 @@ module.exports = function(grunt) {
 				options: {
 					map: false,
 					processors: [
-						require('autoprefixer')({
-							browsers: ['last 2 versions']
-						}),
+						require('autoprefixer')(),
 						require('postcss-sorting')({
 							'sort-order': 'csscomb'
 						}),
@@ -83,15 +79,15 @@ module.exports = function(grunt) {
 				tasks: ['dev']
 			}
 		}
-	});
+	})
 
 	// Load npm plugins to provide necessary tasks.
 	require('load-grunt-tasks')(grunt, {
 		pattern: ['grunt-*']
-	});
+	})
 
 	// Default task.
-	grunt.registerTask('default', ['css']);
-	grunt.registerTask('dev', ['less', 'css_mqpacker']);
-	grunt.registerTask('css', ['less', 'css_mqpacker', 'postcss']);
-};
+	grunt.registerTask('default', ['css'])
+	grunt.registerTask('dev', ['less', 'css_mqpacker'])
+	grunt.registerTask('css', ['less', 'css_mqpacker', 'postcss'])
+}
